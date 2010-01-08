@@ -1,0 +1,46 @@
+<!DOCTYPE html 
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>Simple MooTools TabPane component</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.3/mootools-yui-compressed.js" type="text/javascript"></script>
+    <script src="TabPane.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var tabPane;
+        document.addEvent('domready', function() {
+            tabPane = new TabPane('demo', {tabs: '.tab', content: '.content'});
+        });
+    </script>
+</head>
+
+<body>
+
+<h1>Tab pane</h1>
+
+<div id="demo">
+    <ul>
+        <li class="tab">First tab</li>
+        <li class="tab">Second tab</li>
+    </li>
+    <p class="content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit ligula, consectetur sed sodales quis, fringilla ut ipsum. Nunc sodales, massa id lobortis posuere, dolor libero rutrum quam, sed luctus ipsum dolor vitae sem. Praesent ornare metus sed nunc auctor tristique. Pellentesque felis arcu, eleifend at commodo luctus, luctus at tortor. Suspendisse potenti. Nunc tempor elit est. Sed molestie suscipit iaculis. Ut porttitor, arcu sit amet aliquet congue, nibh orci pharetra dui, in porta sapien dui in est. Vestibulum nisi sapien, posuere consequat ornare a, cursus vel felis. Fusce molestie, mauris a fringilla lacinia, mauris nibh accumsan leo, sit amet porta purus augue eget est. 
+    </p>
+    <p class="content">
+        Sed cursus tristique bibendum. Quisque et diam mattis erat accumsan tincidunt id eu libero. Ut commodo ante ut tortor iaculis eget cursus magna pretium. Sed non enim arcu. Aenean mattis auctor lacinia. Nunc vel diam quis purus hendrerit viverra. Quisque porttitor magna a sem suscipit dapibus. Vivamus et lectus turpis, at ornare dolor. Aliquam enim metus, porta eget dapibus nec, mollis a lacus. Aliquam id tortor in justo tristique sodales quis nec orci. Cras placerat, orci at egestas dictum, augue purus varius quam, nec blandit nulla odio nec tellus. Nulla egestas congue blandit. Duis ultricies, quam in pretium semper, metus justo congue justo, a pretium diam velit ut urna. Vestibulum fermentum bibendum nunc, ac volutpat ligula pellentesque in. Praesent blandit libero a nunc vulputate fermentum ac nec est. Donec est arcu, aliquam in vulputate a, consectetur in dolor. Pellentesque pulvinar auctor dapibus. Proin elit libero, facilisis vel ultricies vel, bibendum in sem. 
+    </p>
+</div>
+
+<div>
+    <h2>New tab title</h2>
+    <input type="text" name="title" id="new-tab-title" />
+    <h2>New tab content</h2>
+    <textarea cols="20" rows="4" name="content" id="new-tab-content"></textarea>
+</div>
+
+</body>
+
+</html>
