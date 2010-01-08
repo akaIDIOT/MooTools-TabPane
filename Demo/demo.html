@@ -6,15 +6,33 @@
 
 <head>
     <title>Simple MooTools TabPane component</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.3/mootools-yui-compressed.js" type="text/javascript"></script>
-    <script src="TabPane.js" type="text/javascript"></script>
-
+    <script src="mootools-1.2.4-core.js" type="text/javascript"></script>
+    <script src="mootools-1.2.4-more.js" type="text/javascript"></script>
+    <script src="../Source/TabPane.js" type="text/javascript"></script>
     <script type="text/javascript">
-        var tabPane;
         document.addEvent('domready', function() {
-            tabPane = new TabPane('demo', {tabs: '.tab', content: '.content'});
+            new TabPane('demo', {tabSelector: '.tab', contentSelector: '.content'});
         });
     </script>
+    <style type="text/css">
+        .tab {
+            display: inline;
+            padding: 0 1em;
+            list-style: none;
+            cursor: pointer;
+        }
+        .input-wrapper {
+            padding: .2em;
+            border: 1px #666 solid;
+        }
+        .input-wrapper input, .input-wrapper textarea {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font: inherit;
+            border: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,9 +54,14 @@
 
 <div>
     <h2>New tab title</h2>
-    <input type="text" name="title" id="new-tab-title" />
+    <div class="input-wrapper"><div>
+        <input type="text" name="title" value="Third tab" id="new-tab-title" />
+    </div></div>
     <h2>New tab content</h2>
-    <textarea cols="20" rows="4" name="content" id="new-tab-content"></textarea>
+    <div class="input-wrapper"><div>
+        <textarea cols="20" rows="4" name="content" id="new-tab-content">Donec feugiat tellus nec tortor ultrices mollis. Sed ut nunc ac dui fermentum rutrum. Duis interdum gravida gravida. Duis non ligula sit amet lacus iaculis ornare. Morbi quis purus elementum ante luctus iaculis vel vitae justo. Nullam quis neque sed lorem hendrerit hendrerit. Etiam sagittis, quam et sagittis lacinia, turpis tellus scelerisque lacus, venenatis pulvinar lectus lectus vitae ligula. Quisque vel nibh nunc, non mattis lectus. Praesent et purus urna, a porttitor lorem. Sed lorem nibh, consectetur vel imperdiet in, tempor et sapien. Aliquam erat volutpat. </textarea>
+    </div></div>
+    <button id="new-tab" style="margin-top:1em;">Add tab</button>
 </div>
 
 </body>
