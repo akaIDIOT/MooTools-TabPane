@@ -4,7 +4,8 @@ var TabPane = new Class({
 
     options: {
         tabSelector: '.tab',
-        contentSelector: '.content'
+        contentSelector: '.content',
+        activeClass: 'active'
     },
 
     container: null,
@@ -21,12 +22,15 @@ var TabPane = new Class({
             var content = self.container.getElements(self.options.contentSelector)[index];
 
             if (content) {
+                self.container.getElements(self.options.tabSelector).removeClass(self.options.activeClass);
                 self.container.getElements(self.options.contentSelector).setStyle('display', 'none');
+                this.addClass(self.options.activeClass);
                 content.setStyle('display', 'block');
                 self.fireEvent('change', index);
             }
         });
 
+        this.container.getElement(this.options.tabSelector).addClass(this.options.activeClass);
         this.container.getElement(this.options.contentSelector).setStyle('display', 'block');
     }
 
