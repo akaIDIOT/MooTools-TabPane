@@ -8,7 +8,7 @@ authors: akaIDIOT
 
 version: 0.1
 
-provides: [TabPane]
+provides: TabPane
 
 requires:
     core/1.2.4
