@@ -17,7 +17,7 @@ requires:
     more/1.2.4
     - Element.Delegation
 
-provides: [TabPane]
+provides: TabPane
 
 ...
 */
