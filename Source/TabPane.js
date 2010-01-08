@@ -4,18 +4,17 @@ description: TabPane Class
 
 license: MIT-style
 
-authors:
-- akaIDIOT
+author: akaIDIOT
 
 requires:
-    - core/1.2.4
-        - Class
-        - Class.Extras 
-        - Element 
-        - Element.Event
-        - Selectors 
-    - more/1.2.4
-        - Element.Delegation
+- core/1.2.4
+    - Class
+    - Class.Extras 
+    - Element 
+    - Element.Event
+    - Selectors 
+- more/1.2.4
+    - Element.Delegation
 
 provides: TabPane
 ...
