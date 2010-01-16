@@ -9,7 +9,7 @@ authors: akaIDIOT
 version: 0.1
 
 requires:
-- core/1.2.4
+- core/1.2.4:
     - Class
     - Class.Extras 
     - Element 
