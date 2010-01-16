@@ -8,8 +8,6 @@ authors: akaIDIOT
 
 version: 0.1
 
-provides: TabPane
-
 requires:
     core/1.2.4
     - Class
@@ -19,6 +17,9 @@ requires:
     - Selectors 
     more/1.2.4
     - Element.Delegation
+
+provides: [$, $$, Element]
+
 ...
 */
 

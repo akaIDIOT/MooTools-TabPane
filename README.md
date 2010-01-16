@@ -40,4 +40,4 @@ Default, it uses the selector '.tab' for a the tab headers and '.content' for th
 
 ### Events: 
 
-- change - (*function*) Function executed when a tab is selected. 
+- change - (*function*) Function executed when a tab is selected. The index of the selected tab is passed as the only argument. 
