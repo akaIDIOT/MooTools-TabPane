@@ -9,16 +9,10 @@ authors: akaIDIOT
 version: 0.1
 
 requires:
-    core/1.2.4
-    - Class
-    - Class.Extras 
-    - Element 
-    - Element.Event
-    - Selectors 
-    more/1.2.4
-    - Element.Delegation
+- core/1.2.4: [Class, Class.Extras, Element, Element.Event, Selectors]
+- more/1.2.4: Element.Delegation
 
-provides: [$, $$, Element]
+provides: TabPane
 
 ...
 */
