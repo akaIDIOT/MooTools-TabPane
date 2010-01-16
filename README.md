@@ -6,6 +6,8 @@ Because all the tab switching is based on delegated events, no effort is needed 
 
 Styling is left completely up to the user. Whether you want an inline list as the tab headers or a series of links, you're the boss. 
 
+![Screenshot](http://spooky.student.utwente.nl/~akaidiot/simple-tab-pane.png)
+
 How To Use
 ----------
 

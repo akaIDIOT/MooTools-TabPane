@@ -13,6 +13,15 @@
         document.addEvent('domready', function() {
             new TabPane('demo');
 
+            $('demo').addEvent('click:relay(.remove)', function(e) {
+                new Event(e).stop();
+                var parent = this.getParent('.tab');
+                var index = $('demo').getElements('.tab').indexOf(parent);
+                console.log(parent, parent.getElements('.tab'), index);
+                $('demo').getElements('.tab')[index].destroy();
+                $('demo').getElements('.content')[index].destroy();
+            });
+
             $('new-tab').addEvent('click', function() {
                 var title = $('new-tab-title').get('value');
                 var content = $('new-tab-content').get('value');
@@ -22,31 +31,25 @@
                     return;
                 }
 
-                $('demo').getElement('ul').adopt(new Element('li', {'class': 'tab', text: title}));
+                $('demo').getElement('ul').adopt(new Element('li', {'class': 'tab', text: title}).adopt(new Element('span', {'class': 'remove', html: '&times'})));
                 $('demo').adopt(new Element('p', {'class': 'content', text: content}).setStyle('display', 'none'));
             });
         });
     </script>
+    <link href="style.css" type="text/css" rel="stylesheet" />
     <style type="text/css">
-        .tab {
-            display: inline;
-            padding: 0 1em;
-            list-style: none;
-            cursor: pointer;
-        }
-        .tab.active {
-            background-color: #ccf;
-        }
         .input-wrapper {
             padding: .2em;
-            border: 1px #666 solid;
+            border: 1px #333 solid;
         }
         .input-wrapper input, .input-wrapper textarea {
             width: 100%;
             margin: 0;
             padding: 0;
             font: inherit;
+            color: inherit;
             border: 0;
+            background-color: transparent;
         }
     </style>
 </head>
@@ -56,9 +59,10 @@
 <h1>Tab pane</h1>
 
 <div id="demo">
-    <ul>
-        <li class="tab">First tab</li>
-        <li class="tab">Second tab</li>
+    <ul class="tabs">
+        <li class="tab">Simple <span class="remove">&times;</span></li>
+        <li class="tab">Tab <span class="remove">&times;</span></li>
+        <li class="tab">Pane <span class="remove">&times;</span></li>
     </ul>
     <p class="content">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit ligula, consectetur sed sodales quis, fringilla ut ipsum. Nunc sodales, massa id lobortis posuere, dolor libero rutrum quam, sed luctus ipsum dolor vitae sem. Praesent ornare metus sed nunc auctor tristique. Pellentesque felis arcu, eleifend at commodo luctus, luctus at tortor. Suspendisse potenti. Nunc tempor elit est. Sed molestie suscipit iaculis. Ut porttitor, arcu sit amet aliquet congue, nibh orci pharetra dui, in porta sapien dui in est. Vestibulum nisi sapien, posuere consequat ornare a, cursus vel felis. Fusce molestie, mauris a fringilla lacinia, mauris nibh accumsan leo, sit amet porta purus augue eget est. 
@@ -66,16 +70,19 @@
     <p class="content">
         Sed cursus tristique bibendum. Quisque et diam mattis erat accumsan tincidunt id eu libero. Ut commodo ante ut tortor iaculis eget cursus magna pretium. Sed non enim arcu. Aenean mattis auctor lacinia. Nunc vel diam quis purus hendrerit viverra. Quisque porttitor magna a sem suscipit dapibus. Vivamus et lectus turpis, at ornare dolor. Aliquam enim metus, porta eget dapibus nec, mollis a lacus. Aliquam id tortor in justo tristique sodales quis nec orci. Cras placerat, orci at egestas dictum, augue purus varius quam, nec blandit nulla odio nec tellus. Nulla egestas congue blandit. Duis ultricies, quam in pretium semper, metus justo congue justo, a pretium diam velit ut urna. Vestibulum fermentum bibendum nunc, ac volutpat ligula pellentesque in. Praesent blandit libero a nunc vulputate fermentum ac nec est. Donec est arcu, aliquam in vulputate a, consectetur in dolor. Pellentesque pulvinar auctor dapibus. Proin elit libero, facilisis vel ultricies vel, bibendum in sem. 
     </p>
+    <p class="content">
+        Donec feugiat tellus nec tortor ultrices mollis. Sed ut nunc ac dui fermentum rutrum. Duis interdum gravida gravida. Duis non ligula sit amet lacus iaculis ornare. Morbi quis purus elementum ante luctus iaculis vel vitae justo. Nullam quis neque sed lorem hendrerit hendrerit. Etiam sagittis, quam et sagittis lacinia, turpis tellus scelerisque lacus, venenatis pulvinar lectus lectus vitae ligula. Quisque vel nibh nunc, non mattis lectus. Praesent et purus urna, a porttitor lorem. Sed lorem nibh, consectetur vel imperdiet in, tempor et sapien. Aliquam erat volutpat.
+    </p>
 </div>
 
 <div>
     <h2>New tab title</h2>
     <div class="input-wrapper"><div>
-        <input type="text" name="title" value="Third tab" id="new-tab-title" />
+        <input type="text" name="title" value="" id="new-tab-title" />
     </div></div>
     <h2>New tab content</h2>
     <div class="input-wrapper"><div>
-        <textarea cols="20" rows="4" name="content" id="new-tab-content">Donec feugiat tellus nec tortor ultrices mollis. Sed ut nunc ac dui fermentum rutrum. Duis interdum gravida gravida. Duis non ligula sit amet lacus iaculis ornare. Morbi quis purus elementum ante luctus iaculis vel vitae justo. Nullam quis neque sed lorem hendrerit hendrerit. Etiam sagittis, quam et sagittis lacinia, turpis tellus scelerisque lacus, venenatis pulvinar lectus lectus vitae ligula. Quisque vel nibh nunc, non mattis lectus. Praesent et purus urna, a porttitor lorem. Sed lorem nibh, consectetur vel imperdiet in, tempor et sapien. Aliquam erat volutpat. </textarea>
+        <textarea cols="20" rows="4" name="content" id="new-tab-content"> </textarea>
     </div></div>
     <button id="new-tab" style="margin-top:1em;">Add tab</button>
 </div>
