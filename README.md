@@ -1,12 +1,16 @@
 Simple Tab Pane
 ===============
+![Screenshot](http://spooky.student.utwente.nl/~akaidiot/simple-tab-pane.png)
+
 Simple Tab Pane is a very simple MooTools class that allows you to create a tab pane from a single element. All it needs is a selector for the tabs (the headers, so to say) and a selector for the corresponding contents. 
 
 Because all the tab switching is based on delegated events, no effort is needed to add tabs: simply add elements with the correct class names (or tag names if you specified your selector as such) and you're done! 
 
 Styling is left completely up to the user. Whether you want an inline list as the tab headers or a series of links, you're the boss. 
 
-![Screenshot](http://spooky.student.utwente.nl/~akaidiot/simple-tab-pane.png)
+*Implementation note: because of [a bug in MooTools More](https://mootools.lighthouseapp.com/projects/24057/tickets/201-issue-with-event-propagation-in-mootools-event-delegation), event propagation doesn't work properly when dealing with delegations. Sadly, this handicaps the removing of tabs via items **inside** the tab header a bit. See the included demo for an implementation of this.* 
+
+A demo is included in the download package. 
 
 How To Use
 ----------
@@ -23,6 +27,8 @@ Default, it uses the selector '.tab' for a the tab headers and '.content' for th
         tabSelector: 'li',
         contentSelector: 'p'
     });
+
+## Constructor 
 
 ### Syntax: 
 
@@ -43,3 +49,32 @@ Default, it uses the selector '.tab' for a the tab headers and '.content' for th
 ### Events: 
 
 - change - (*function*) Function executed when a tab is selected. The index of the selected tab is passed as the only argument. 
+
+## removeTab 
+
+Allows the removal of a certain tab and its corresponding content element from the container. 
+
+### Syntax: 
+
+    #JS
+    myTabPane.removeTab(index);
+
+### Arguments: 
+
+1. index - (*number*) The index of the tab to remove. 
+
+### Events:
+    
+- close - (*function*) Function executed when a tab is removed. The index of the removed tab is passed as the only argument. 
+- change - (*function*) Fired inadvertedly by changing the tab (see the demo and source for this). 
+
+Changelog
+---------
+
+### 0.2
+
+- added removeTab based on index 
+
+### 0.1
+
+- initial release 
