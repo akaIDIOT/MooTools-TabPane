@@ -11,15 +11,13 @@
     <script src="../Source/TabPane.js" type="text/javascript"></script>
     <script type="text/javascript">
         document.addEvent('domready', function() {
-            new TabPane('demo');
+            var tabPane = new TabPane('demo');
 
             $('demo').addEvent('click:relay(.remove)', function(e) {
                 new Event(e).stop();
                 var parent = this.getParent('.tab');
                 var index = $('demo').getElements('.tab').indexOf(parent);
-                console.log(parent, parent.getElements('.tab'), index);
-                $('demo').getElements('.tab')[index].destroy();
-                $('demo').getElements('.content')[index].destroy();
+                tabPane.removeTab(index);
             });
 
             $('new-tab').addEvent('click', function() {
