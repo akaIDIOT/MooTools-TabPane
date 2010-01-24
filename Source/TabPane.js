@@ -33,6 +33,7 @@ var TabPane = new Class({
     },
 
     container: null,
+    showNow: false,
 
     initialize: function(container, options) {
         this.setOptions(options);
@@ -40,22 +41,41 @@ var TabPane = new Class({
         this.container = document.id(container);
         this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
 
-        var self = this;
-        this.container.addEvent('click:relay(' + this.options.tabSelector + ')', function() {
-            var index = self.container.getElements(self.options.tabSelector).indexOf(this);
-            var content = self.container.getElements(self.options.contentSelector)[index];
-
-            if (content) {
-                self.container.getElements(self.options.tabSelector).removeClass(self.options.activeClass);
-                self.container.getElements(self.options.contentSelector).setStyle('display', 'none');
-                this.addClass(self.options.activeClass);
-                content.setStyle('display', 'block');
-                self.fireEvent('change', index);
-            }
-        });
+        this.container.addEvent('click:relay(' + this.options.tabSelector + ')', function(event, tab) {
+            this.showTab(this.container.getElements(this.options.tabSelector).indexOf(tab), tab);
+        }.bind(this));
 
         this.container.getElement(this.options.tabSelector).addClass(this.options.activeClass);
         this.container.getElement(this.options.contentSelector).setStyle('display', 'block');
+    },
+
+    showTab: function(index, tab) {
+        var content = this.container.getElements(this.options.contentSelector)[index];
+        if (!tab) {
+            tab = this.container.getElements(this.options.tabSelector)[index];
+        }
+
+        if (content) {
+            this.container.getElements(this.options.tabSelector).removeClass(this.options.activeClass);
+            this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
+            tab.addClass(this.options.activeClass);
+            content.setStyle('display', 'block');
+            this.fireEvent('change', index);
+        } 
+    },
+
+    removeTab: function(index) {
+        var tabs     = this.container.getElements(this.options.tabSelector);
+        var selected = tabs.indexOf(this.container.getElement('.' + this.options.activeClass));
+        
+        tabs[index].destroy();
+        this.container.getElements(this.options.contentSelector)[index].destroy();
+
+        if (index == selected) {
+            this.showTab(index == tabs.length - 1 ? selected - 1 : selected);
+        } else {
+            this.showTab(index < selected ? selected - 1 : selected);
+        }
     }
 
 });
