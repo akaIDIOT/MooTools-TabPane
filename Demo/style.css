@@ -1,0 +1,36 @@
+body {
+    font-family: sans-serif;
+    color: #ccc;
+    background-color: #111;
+}
+
+ul.tabs {
+    margin: 0;
+    padding: 0 0 2px 0;
+}
+
+li.tab {
+    display: inline;
+    padding: 4px .4em 2px .4em;
+    list-style: none;
+    background-color: #222;
+    border: 1px #333 solid;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+li.tab.active {
+    background-color: #111;
+    border-bottom-color: #111;
+}
+
+li.tab .remove {
+    color: #900;
+}
+
+p.content {
+    margin: 0 0 1em 0;
+    padding: .4em;
+    border: 1px #333 solid;
+}
