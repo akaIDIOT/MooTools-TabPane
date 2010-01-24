@@ -17,7 +17,7 @@
                 new Event(e).stop();
                 var parent = this.getParent('.tab');
                 var index = $('demo').getElements('.tab').indexOf(parent);
-                tabPane.removeTab(index);
+                tabPane.closeTab(index);
             });
 
             $('new-tab').addEvent('click', function() {

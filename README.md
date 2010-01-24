@@ -50,14 +50,14 @@ Default, it uses the selector '.tab' for a the tab headers and '.content' for th
 
 - change - (*function*) Function executed when a tab is selected. The index of the selected tab is passed as the only argument. 
 
-## removeTab 
+## closeTab 
 
-Allows the removal of a certain tab and its corresponding content element from the container. 
+Allows closing of a certain tab and its corresponding content element from the container. 
 
 ### Syntax: 
 
     #JS
-    myTabPane.removeTab(index);
+    myTabPane.closeTab(index);
 
 ### Arguments: 
 
@@ -73,7 +73,7 @@ Changelog
 
 ### 0.2
 
-- added removeTab based on index 
+- added closeTab based on index 
 
 ### 0.1
 
