@@ -64,13 +64,14 @@ var TabPane = new Class({
         } 
     },
 
-    removeTab: function(index) {
+    closeTab: function(index) {
         var tabs     = this.container.getElements(this.options.tabSelector);
         var selected = tabs.indexOf(this.container.getElement('.' + this.options.activeClass)); // is always equals to index 
         
         tabs[index].destroy();
         this.container.getElements(this.options.contentSelector)[index].destroy();
-        
+        this.fireEvent('close', index);
+
         // 'intelligently' selecting a tab is sadly not possible, the tab has already been switched before this method is called 
         this.showTab(index == tabs.length - 1 ? selected - 1 : selected);
     }
