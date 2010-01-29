@@ -8,7 +8,7 @@ Because all the tab switching is based on delegated events, no effort is needed 
 
 Styling is left completely up to the user. Whether you want an inline list as the tab headers or a series of links, you're the boss. 
 
-*Implementation note: because of [a bug in MooTools More](https://mootools.lighthouseapp.com/projects/24057/tickets/201-issue-with-event-propagation-in-mootools-event-delegation), event propagation doesn't work properly when dealing with delegations. Sadly, this handicaps the removing of tabs via items **inside** the tab header a bit. See the included demo for an implementation of this.* 
+*Implementation note: because of [the way event delegation works](https://mootools.lighthouseapp.com/projects/24057/tickets/201-issue-with-event-propagation-in-mootools-event-delegation), event propagation doesn't work properly when dealing with delegations. Sadly, this handicaps the removing of tabs via items **inside** the tab header a bit. See the included demo for an implementation of this.* 
 
 A demo is included in the download package. 
 
