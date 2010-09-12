@@ -1,6 +1,6 @@
 Simple Tab Pane
 ===============
-![Screenshot](http://spooky.student.utwente.nl/~akaidiot/simple-tab-pane.png)
+![Screenshot](http://akaidiot.github.com/MooTools-TabPane/simple-tab-pane.png)
 
 Simple Tab Pane is a very simple MooTools class that allows you to create a tab pane from a single element. All it needs is a selector for the tabs (the headers, so to say) and a selector for the corresponding contents. 
 
