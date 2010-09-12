@@ -1,76 +1,108 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html 
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>akaIDIOT/MooTools-TabPane @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #b5c8bd;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #4a3742; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #4a3742; }
-    h3 { text-align: center; color: #4a3742; }
-    a { color: #4a3742; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
+<head>
+    <title>Simple MooTools TabPane component</title>
+    <script src="mootools-1.2.4-core.js" type="text/javascript"></script>
+    <script src="mootools-1.2.4-more.js" type="text/javascript"></script>
+    <script src="TabPane.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.addEvent('domready', function() {
+            var tabPane = new TabPane('demo');
+
+            $('demo').addEvent('click:relay(.remove)', function(e) {
+                new Event(e).stop();
+                var parent = this.getParent('.tab');
+                var index = $('demo').getElements('.tab').indexOf(parent);
+                tabPane.closeTab(index);
+            });
+
+            $('new-tab').addEvent('click', function() {
+                var title = $('new-tab-title').get('value');
+                var content = $('new-tab-content').get('value');
+
+                if (!title || !content) {
+                    window.alert('Title or content text empty, please fill in some text.');
+                    return;
+                }
+
+                $('demo').getElement('ul').adopt(new Element('li', {'class': 'tab', text: title}).adopt(new Element('span', {'class': 'remove', html: '&times'})));
+                $('demo').adopt(new Element('p', {'class': 'content', text: content}).setStyle('display', 'none'));
+            });
+        });
+    </script>
+    <link href="style.css" type="text/css" rel="stylesheet" />
+    <style type="text/css">
+        a {
+            color: #900;
+        }
+        hr {
+            margin: 1em 0;
+        }
+        .input-wrapper {
+            padding: .2em;
+            border: 1px #444 solid;
+            background-color: #333;
+        }
+        .input-wrapper input, .input-wrapper textarea {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            border: 0;
+            background-color: transparent;
+        }
+    </style>
 </head>
 
 <body>
-  <a href="http://github.com/akaIDIOT/MooTools-TabPane"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
+<h1>Simple Tab Pane</h1>
 
-    <div class="download">
-      <a href="http://github.com/akaIDIOT/MooTools-TabPane/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/akaIDIOT/MooTools-TabPane/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+<p>
+    Demo for a simple tab pane MooTools plugin. Below you can see a simple tab pane with three tabs, enabling a user to switch between three pieces of content. <br />
+    Due to the nature of the inner workings of the tab pane, it will remain functional even after completely reloading it with an asynchronous request. As long as the container the pane is created with stays on the page, the tab pane will remain intact. You can simulate this on this page by adding a new tab using the form on the bottom of the page. 
+</p>
 
-    <h1><a href="http://github.com/akaIDIOT/MooTools-TabPane">MooTools-TabPane</a>
-      <span class="small">by <a href="http://github.com/akaIDIOT">akaIDIOT</a></span></h1>
+<p>
+    For more information and documentation see <a href="http://mootools.net/forge/p/simple_tab_pane">the MooTools Forge page for this plugin</a> or <a href="http://github.com/akaIDIOT/MooTools-TabPane">the github page</a>.
+</p>
 
-    <div class="description">
-      A simple MooTools class for creating a tab pane.
-    </div>
+<hr />
 
-    
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/akaIDIOT/MooTools-TabPane/zipball/master">zip</a> or
-      <a href="http://github.com/akaIDIOT/MooTools-TabPane/tarball/master">tar</a> formats.
+<div id="demo">
+    <ul class="tabs">
+        <li class="tab">Simple <span class="remove">&times;</span></li>
+        <li class="tab">Tab <span class="remove">&times;</span></li>
+        <li class="tab">Pane <span class="remove">&times;</span></li>
+    </ul>
+    <p class="content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elit ligula, consectetur sed sodales quis, fringilla ut ipsum. Nunc sodales, massa id lobortis posuere, dolor libero rutrum quam, sed luctus ipsum dolor vitae sem. Praesent ornare metus sed nunc auctor tristique. Pellentesque felis arcu, eleifend at commodo luctus, luctus at tortor. Suspendisse potenti. Nunc tempor elit est. Sed molestie suscipit iaculis. Ut porttitor, arcu sit amet aliquet congue, nibh orci pharetra dui, in porta sapien dui in est. Vestibulum nisi sapien, posuere consequat ornare a, cursus vel felis. Fusce molestie, mauris a fringilla lacinia, mauris nibh accumsan leo, sit amet porta purus augue eget est. 
     </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/akaIDIOT/MooTools-TabPane</pre>
+    <p class="content">
+        Sed cursus tristique bibendum. Quisque et diam mattis erat accumsan tincidunt id eu libero. Ut commodo ante ut tortor iaculis eget cursus magna pretium. Sed non enim arcu. Aenean mattis auctor lacinia. Nunc vel diam quis purus hendrerit viverra. Quisque porttitor magna a sem suscipit dapibus. Vivamus et lectus turpis, at ornare dolor. Aliquam enim metus, porta eget dapibus nec, mollis a lacus. Aliquam id tortor in justo tristique sodales quis nec orci. Cras placerat, orci at egestas dictum, augue purus varius quam, nec blandit nulla odio nec tellus. Nulla egestas congue blandit. Duis ultricies, quam in pretium semper, metus justo congue justo, a pretium diam velit ut urna. Vestibulum fermentum bibendum nunc, ac volutpat ligula pellentesque in. Praesent blandit libero a nunc vulputate fermentum ac nec est. Donec est arcu, aliquam in vulputate a, consectetur in dolor. Pellentesque pulvinar auctor dapibus. Proin elit libero, facilisis vel ultricies vel, bibendum in sem. 
     </p>
+    <p class="content">
+        Donec feugiat tellus nec tortor ultrices mollis. Sed ut nunc ac dui fermentum rutrum. Duis interdum gravida gravida. Duis non ligula sit amet lacus iaculis ornare. Morbi quis purus elementum ante luctus iaculis vel vitae justo. Nullam quis neque sed lorem hendrerit hendrerit. Etiam sagittis, quam et sagittis lacinia, turpis tellus scelerisque lacus, venenatis pulvinar lectus lectus vitae ligula. Quisque vel nibh nunc, non mattis lectus. Praesent et purus urna, a porttitor lorem. Sed lorem nibh, consectetur vel imperdiet in, tempor et sapien. Aliquam erat volutpat.
+    </p>
+</div>
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/akaIDIOT/MooTools-TabPane">akaIDIOT/MooTools-TabPane</a>
-    </div>
+<div>
+    <h2>New tab title</h2>
+    <div class="input-wrapper"><div>
+        <input type="text" name="title" value="" id="new-tab-title" />
+    </div></div>
+    <h2>New tab content</h2>
+    <div class="input-wrapper"><div>
+        <textarea cols="20" rows="4" name="content" id="new-tab-content"></textarea>
+    </div></div>
+    <button id="new-tab" style="margin-top:1em;">Add tab</button>
+</div>
 
-  </div>
-
-  
 </body>
+
 </html>
