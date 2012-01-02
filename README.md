@@ -8,7 +8,7 @@ Because all the tab switching is based on delegated events, no effort is needed 
 
 Styling is left completely up to the user. Whether you want an inline list as the tab headers or a series of links, you're the boss. 
 
-Simple Tab Pane is compatible with both MooTools 1.2 and 1.3 (even without the compatability layer). 
+Simple Tab Pane is compatible with all of MooTools 1.2, 1.3 and 1.4 (even without the compatability layer). 
 
 *Implementation note: because of [the way event delegation works](https://mootools.lighthouseapp.com/projects/24057/tickets/201-issue-with-event-propagation-in-mootools-event-delegation), event propagation doesn't work properly when dealing with delegations. Sadly, this handicaps the removing of tabs via items **inside** the tab header a bit. See the included demo for an implementation of this.* 
 
@@ -72,6 +72,10 @@ Allows closing of a certain tab and its corresponding content element from the c
 
 Changelog
 ---------
+
+### 0.3
+
+- updated to MooTools 1.4 (functional code unchanged) 
 
 ### 0.2
 

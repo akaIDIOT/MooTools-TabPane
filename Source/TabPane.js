@@ -6,16 +6,15 @@ license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.2
+version: 0.3
 
 requires:
-  core/1.3:
+  core/1.4:
   - Class
   - Class.Extras 
+  - Event
   - Element 
   - Element.Event
-  - Selectors
-  more/1.3:
   - Element.Delegation
 
 provides: TabPane
