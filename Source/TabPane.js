@@ -33,7 +33,7 @@ var TabPane = new Class({
 
     container: null,
 
-    initialize: function(container, options) {
+    initialize: function(container, options, showNow) {
         this.setOptions(options);
 
         this.container = document.id(container);
@@ -43,8 +43,13 @@ var TabPane = new Class({
             this.showTab(this.container.getElements(this.options.tabSelector).indexOf(tab), tab);
         }.bind(this));
 
-        this.container.getElement(this.options.tabSelector).addClass(this.options.activeClass);
-        this.container.getElement(this.options.contentSelector).setStyle('display', 'block');
+        if (typeOf(showNow) == 'function') {
+            showNow = showNow();
+        } else {
+            showNow = showNow || 0;
+        }
+
+        this.showTab(showNow);
     },
 
     showTab: function(index, tab) {
