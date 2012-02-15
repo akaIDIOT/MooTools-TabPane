@@ -32,7 +32,6 @@ var TabPane = new Class({
     },
 
     container: null,
-    showNow: false,
 
     initialize: function(container, options) {
         this.setOptions(options);
