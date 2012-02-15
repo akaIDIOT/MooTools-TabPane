@@ -10,7 +10,10 @@
     <script src="../Source/TabPane.js" type="text/javascript"></script>
     <script type="text/javascript">
         document.addEvent('domready', function() {
-            var tabPane = new TabPane('demo');
+            var tabPane = new TabPane('demo', {}, function() {
+				var showTab = window.location.hash.match(/tab=(\d+)/);
+				return showTab ? showTab[1] : 0;
+			});
 
             $('demo').addEvent('click:relay(.remove)', function(e) {
 				// stop the event from bubbling up and causing a native click
