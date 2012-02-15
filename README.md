@@ -89,3 +89,10 @@ Changelog
 ### 0.1
 
 - initial release 
+
+Credits
+-------
+Credits where credits are due:
+
+- [@shakaran](https://github.com/shakaran) for suggesting the optional `showNow` parameter in the constructor 
+
