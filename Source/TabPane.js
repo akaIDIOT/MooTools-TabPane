@@ -21,7 +21,15 @@ provides: TabPane
 ...
 */
 
-var TabPane = new Class({
+(function() {
+
+var typeOf = this.typeOf;
+
+if (!typeOf) {
+	typeOf = $type;
+}
+
+var TabPane = this.TabPane = new Class({
     
     Implements: [Events, Options],
 
@@ -80,3 +88,5 @@ var TabPane = new Class({
     }
 
 });
+
+})();
