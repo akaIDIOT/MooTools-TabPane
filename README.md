@@ -35,12 +35,13 @@ Default, it uses the selector '.tab' for a the tab headers and '.content' for th
 ### Syntax: 
 
     #JS
-    var myTabPane = new TabPane(container[, options]);
+    var myTabPane = new TabPane(container[, options[, showNow]]);
 
 ### Arguments: 
 
 1. container - (*string* or *element*) The element that contains the tab components (tab headers and contents). 
 2. options - (*object*, optional) On options object, see below. 
+3. showNow - (*number* or *function*, optional) A number of function that returns a number, the index to enable initially. 
 
 ### Options: 
 
@@ -72,6 +73,10 @@ Allows closing of a certain tab and its corresponding content element from the c
 
 Changelog
 ---------
+
+### 0.4
+
+- add optional third parameter showNow to select tab on init 
 
 ### 0.3
 

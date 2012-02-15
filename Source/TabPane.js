@@ -6,7 +6,7 @@ license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.3
+version: 0.4
 
 requires:
   core/1.4:
