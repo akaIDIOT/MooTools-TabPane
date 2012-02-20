@@ -82,10 +82,15 @@ var TabPane = this.TabPane = new Class({
 	},
 
 	add: function(tab, content, location, showNow) {
-		// TODO: use location as index (or something like 'last' or 'first'?)
-		tab.inject(this.container.getElements(this.options.tabSelector).getLast(), 'after');
-		content.setStyle('display', 'none');
-		content.inject(this.container.getElements(this.options.contentSelector).getLast(), 'after');
+		if (typeOf(location) == 'number') {
+			var before = this.get(location);
+			tab.inject(before[0], 'before');
+			content.inject(before[1], 'before');
+		} else {
+			tab.inject(this.container.getElements(this.options.tabSelector).getLast(), 'after');
+			content.setStyle('display', 'none');
+			content.inject(this.container.getElements(this.options.contentSelector).getLast(), 'after');
+		}
 
 		if (showNow) {
 			this.showTab(null, tab);
