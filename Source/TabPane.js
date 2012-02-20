@@ -62,10 +62,13 @@ var TabPane = this.TabPane = new Class({
 	},
 
 	get: function(index) {
-		// TODO: allow index to be a tab header and find the corresponding content (or the other way around)? 
-		var tab = this.container.getElements(this.options.tabSelector)[index];
-		var content = this.container.getElements(this.options.contentSelector)[index];
-		return [tab, content];
+		if (typeOf(index) == 'element') {
+			return this.get(this.indexOf(index));
+		} else {
+			var tab = this.container.getElements(this.options.tabSelector)[index];
+			var content = this.container.getElements(this.options.contentSelector)[index];
+			return [tab, content];
+		}
 	},
 
 	indexOf: function(element) {
