@@ -34,8 +34,9 @@
                     return;
                 }
 
-                $('demo').getElement('ul').adopt(new Element('li', {'class': 'tab', text: title}).adopt(new Element('span', {'class': 'remove', html: '&times'})));
-                $('demo').adopt(new Element('p', {'class': 'content', text: content}).setStyle('display', 'none'));
+                title = new Element('li', {'class': 'tab', text: title}).adopt(new Element('span', {'class': 'remove', html: '&times'}));
+				content = new Element('p', {'class': 'content', text: content}).setStyle('display', 'none');
+				tabPane.add(title, content);
             });
         });
     </script>

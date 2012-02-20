@@ -83,10 +83,13 @@ var TabPane = this.TabPane = new Class({
 
 	add: function(tab, content, location, showNow) {
 		// TODO: use location as index (or something like 'last' or 'first'?)
-		// TODO: use showNow as a boolean argument to directly 'focus' the new tab / content 
 		tab.inject(this.container.getElements(this.options.tabSelector).getLast(), 'after');
 		content.setStyle('display', 'none');
 		content.inject(this.container.getElements(this.options.contentSelector).getLast(), 'after');
+
+		if (showNow) {
+			this.showTab(null, tab);
+		}
 	},
 
 	showTab: function(index, tab) {
