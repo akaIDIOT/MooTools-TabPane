@@ -19,10 +19,8 @@
 				// stop the event from bubbling up and causing a native click
                 e.stop();
                 var parent = this.getParent('.tab');
-				// find the index for the tab that needs to be closed 
-                var index = $('demo').getElements('.tab').indexOf(parent);
 				// close the tab (closeTab takes care of selecting an adjacent tab) 
-                tabPane.closeTab(index);
+                tabPane.close(parent);
             });
 
             $('new-tab').addEvent('click', function() {
