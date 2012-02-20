@@ -48,8 +48,7 @@ var TabPane = this.TabPane = new Class({
 		this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
 
 		this.container.addEvent('click:relay(' + this.options.tabSelector + ')', function(event, tab) {
-			// showTab will find the index if tab is passed 
-			this.showTab(null, tab);
+			this.show(tab);
 		}.bind(this));
 
 		if (typeOf(showNow) == 'function') {
@@ -58,7 +57,7 @@ var TabPane = this.TabPane = new Class({
 			showNow = showNow || 0;
 		}
 
-		this.showTab(showNow);
+		this.show(showNow);
 	},
 
 	get: function(index) {
@@ -93,26 +92,33 @@ var TabPane = this.TabPane = new Class({
 		}
 
 		if (showNow) {
-			this.showTab(null, tab);
+			this.show(tab);
 		}
 	},
 
-	showTab: function(index, tab) {
-		// XXX: use a single argument and a type check to see whether to use it as an index or tab (BREAKS API!)
-		if (tab) {
-			index = this.indexOf(tab);
-		} else {
-			tab = this.container.getElements(this.options.tabSelector)[index];
+	show: function(what) {
+		if (typeOf(what) != 'number') {
+			what = this.indexOf(what);
 		}
-		var content = this.container.getElements(this.options.contentSelector)[index];
 
-		if (content) {
+		var items = this.get(what);
+		var tab = items[0];
+		var content = items[1];
+
+		if (tab) {
 			this.container.getElements(this.options.tabSelector).removeClass(this.options.activeClass);
 			this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
 			tab.addClass(this.options.activeClass);
 			content.setStyle('display', 'block');
-			this.fireEvent('change', index);
-		} 
+			this.fireEvent('change', what);
+		}
+	},
+
+	showTab: function(index, tab) {
+		this.show(typeOf(index) == 'number' ? index : tab);
+		if (console) {
+			console.warn('showTab is deprecated, please use show instead');
+		}
 	},
 
 	closeTab: function(index) {
@@ -124,7 +130,7 @@ var TabPane = this.TabPane = new Class({
 		this.fireEvent('close', index);
 
 		// 'intelligently' selecting a tab is sadly not possible, the tab has already been switched before this method is called 
-		this.showTab(index == tabs.length - 1 ? selected - 1 : selected);
+		this.show(index == tabs.length - 1 ? selected - 1 : selected);
 	}
 
 });
