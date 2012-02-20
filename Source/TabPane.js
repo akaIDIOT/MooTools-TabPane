@@ -114,6 +114,27 @@ var TabPane = this.TabPane = new Class({
 		}
 	},
 
+	close: function(what) {
+		if (typeOf(what) != 'number') {
+			what = this.indexOf(what);
+		}
+
+		var items = this.get(what);
+		var tab = items[0]
+		var content = items[1];
+
+		if (tab) {
+			var tabs = this.container.getElements(this.options.tabSelector);
+			var selected = tabs.indexOf(this.container.getElement('.' + this.options.activeClass)); // will always be equal to index if the closing element matches tabSelector 
+
+			tab.destroy();
+			content.destroy();
+			this.fireEvent('close', what);
+			
+			this.show(selected.limit(0, tabs.length - 2)); // a tab was removed, length is 1 less now 
+		}
+	},
+
 	showTab: function(index, tab) {
 		this.show(typeOf(index) == 'number' ? index : tab);
 		if (console) {
@@ -122,15 +143,10 @@ var TabPane = this.TabPane = new Class({
 	},
 
 	closeTab: function(index) {
-		var tabs	 = this.container.getElements(this.options.tabSelector);
-		var selected = tabs.indexOf(this.container.getElement('.' + this.options.activeClass)); // is always equals to index 
-		
-		tabs[index].destroy();
-		this.container.getElements(this.options.contentSelector)[index].destroy();
-		this.fireEvent('close', index);
-
-		// 'intelligently' selecting a tab is sadly not possible, the tab has already been switched before this method is called 
-		this.show(index == tabs.length - 1 ? selected - 1 : selected);
+		this.close(index);
+		if (console) {
+			console.warn('closeTab is deprecated, please use close instead');
+		}
 	}
 
 });
