@@ -48,7 +48,8 @@ var TabPane = this.TabPane = new Class({
 		this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
 
 		this.container.addEvent('click:relay(' + this.options.tabSelector + ')', function(event, tab) {
-			this.showTab(this.container.getElements(this.options.tabSelector).indexOf(tab), tab);
+			// showTab will find the index if tab is passed 
+			this.showTab(null, tab);
 		}.bind(this));
 
 		if (typeOf(showNow) == 'function') {
@@ -86,10 +87,13 @@ var TabPane = this.TabPane = new Class({
 	},
 
 	showTab: function(index, tab) {
-		var content = this.container.getElements(this.options.contentSelector)[index];
-		if (!tab) {
+		// XXX: use a single argument and a type check to see whether to use it as an index or tab (BREAKS API!)
+		if (tab) {
+			index = this.indexOf(tab);
+		} else {
 			tab = this.container.getElements(this.options.tabSelector)[index];
 		}
+		var content = this.container.getElements(this.options.contentSelector)[index];
 
 		if (content) {
 			this.container.getElements(this.options.tabSelector).removeClass(this.options.activeClass);
