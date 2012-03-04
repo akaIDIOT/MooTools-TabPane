@@ -34,6 +34,8 @@ this.TabPane.implement({
 			content.inject(this.container.getElements(this.options.contentSelector).getLast(), 'after');
 		}
 
+		this.fireEvent('add', this.indexOf(tab));
+
 		if (showNow) {
 			this.show(tab);
 		}
