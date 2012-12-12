@@ -22,11 +22,9 @@ provides: TabPane
 */
 
 (function() {
-
-var typeOf = this.typeOf;
-
-if (!typeOf) {
-	typeOf = $type;
+	
+if (!this.typeOf && this.$type) {
+	var typeOf = $type;
 }
 
 var TabPane = this.TabPane = new Class({
@@ -51,7 +49,7 @@ var TabPane = this.TabPane = new Class({
 			this.show(tab);
 		}.bind(this));
 
-		if (typeOf(showNow) == 'function') {
+		if (typeof showNow == 'function') {
 			showNow = showNow();
 		} else {
 			showNow = showNow || 0;
@@ -81,7 +79,7 @@ var TabPane = this.TabPane = new Class({
 	},
 
 	show: function(what) {
-		if (typeOf(what) != 'number') {
+		if (typeof what != 'number') {
 			what = this.indexOf(what);
 		}
 
@@ -100,7 +98,7 @@ var TabPane = this.TabPane = new Class({
 
 	// TODO: remove functions below this line in future version 
 	showTab: function(index, tab) {
-		this.show(typeOf(index) == 'number' ? index : tab);
+		this.show(typeof index == 'number' ? index : tab);
 		if (console) {
 			console.warn('showTab is deprecated, please use show instead');
 		}
