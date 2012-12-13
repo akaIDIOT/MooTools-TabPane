@@ -6,7 +6,7 @@ license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.5
+version: 0.5.1
 
 requires:
   core/1.4:
@@ -101,20 +101,6 @@ var TabPane = this.TabPane = new Class({
 			this.fireEvent('change', what);
 		}
 		// no else, not clear what to do
-	},
-
-	showTab: function(index, tab) {
-		this.show(typeOf(index) == 'number' ? index : tab);
-		if (console) {
-			console.warn('showTab is deprecated, please use show instead');
-		}
-	},
-
-	closeTab: function(index) {
-		this.close(index);
-		if (console) {
-			console.warn('closeTab is deprecated, please use close instead');
-		}
 	}
 
 });
