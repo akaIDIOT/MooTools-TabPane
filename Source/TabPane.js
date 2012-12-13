@@ -23,11 +23,7 @@ provides: TabPane
 
 (function() {
 
-var typeOf = this.typeOf;
-
-if (!typeOf) {
-	typeOf = $type;
-}
+var typeOf = this.typeOf || this.$type;
 
 var TabPane = this.TabPane = new Class({
 	
