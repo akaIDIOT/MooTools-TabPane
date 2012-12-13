@@ -1,19 +1,19 @@
 /*
 ---
-description: TabPane Class 
+description: TabPane Class
 
 license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.4
+version: 0.5
 
 requires:
   core/1.4:
   - Class
-  - Class.Extras 
+  - Class.Extras
   - Event
-  - Element 
+  - Element
   - Element.Event
   - Element.Delegation
 
@@ -23,10 +23,11 @@ provides: TabPane
 
 (function() {
 
+// make typeOf usable for MooTools 1.2 through 1.4
 var typeOf = this.typeOf || this.$type;
 
 var TabPane = this.TabPane = new Class({
-	
+
 	Implements: [Events, Options],
 
 	options: {
@@ -41,12 +42,15 @@ var TabPane = this.TabPane = new Class({
 		this.setOptions(options);
 
 		this.container = document.id(container);
+		// hide all the content parts by default
 		this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
 
+		// add a relayed click event to handle switching tabs
 		this.container.addEvent('click:relay(' + this.options.tabSelector + ')', function(event, tab) {
 			this.show(tab);
 		}.bind(this));
 
+		// determine what tab to show right now (default to the 'leftmost' one)
 		if (typeOf(showNow) == 'function') {
 			showNow = showNow();
 		} else {
@@ -58,6 +62,7 @@ var TabPane = this.TabPane = new Class({
 
 	get: function(index) {
 		if (typeOf(index) == 'element') {
+			// call get with the index of the supplied element (NB: will break if indexOf returns -1)
 			return this.get(this.indexOf(index));
 		} else {
 			var tab = this.container.getElements(this.options.tabSelector)[index];
@@ -72,15 +77,18 @@ var TabPane = this.TabPane = new Class({
 		} else if (element.match(this.options.contentSelector)) {
 			return this.container.getElements(this.options.contentSelector).indexOf(element);
 		} else {
+			// element is neither tab nor content, return -1 per convention
 			return -1;
 		}
 	},
 
 	show: function(what) {
 		if (typeOf(what) != 'number') {
+			// turn the argument into its usable form: a number
 			what = this.indexOf(what);
 		}
 
+		// if only JavaScript had tuple unpacking...
 		var items = this.get(what);
 		var tab = items[0];
 		var content = items[1];
@@ -92,9 +100,9 @@ var TabPane = this.TabPane = new Class({
 			content.setStyle('display', 'block');
 			this.fireEvent('change', what);
 		}
+		// no else, not clear what to do
 	},
 
-	// TODO: remove functions below this line in future version 
 	showTab: function(index, tab) {
 		this.show(typeOf(index) == 'number' ? index : tab);
 		if (console) {
