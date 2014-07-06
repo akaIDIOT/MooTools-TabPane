@@ -8,7 +8,7 @@ Because all the tab switching is based on delegated events, no effort is needed 
 
 Styling is left completely up to the user. Whether you want an inline list as the tab headers or a series of links, you're the boss.
 
-Simple Tab Pane is compatible with all of MooTools 1.2, 1.3 and 1.4 (even without the compatability layer).
+Simple Tab Pane is compatible with all of MooTools 1.2, 1.3, 1.4 and 1.5 (even without the compatability layer).
 
 As of version 0.5, functions that add and remove tabs have been moved to a separate file to save bytes and keep simple tab pane simple. Due to the use of event delegation, simply adding and removing elements to the container does the trick as well (and is the exact trick done by the functions in `TabPane.Extra.js`).
 
@@ -97,6 +97,10 @@ Allows closing of a certain tab and its corresponding content element from the c
 Changelog
 ---------
 
+### 0.5.2
+
+- update to MooTools 1.5 (functional code unchanged)
+
 ### 0.5.1
 
 - **REMOVE** showTab and closeTab in favor of show and close
@@ -113,11 +117,11 @@ Changelog
 
 ### 0.3
 
-- updated to MooTools 1.4 (functional code unchanged)
+- update to MooTools 1.4 (functional code unchanged)
 
 ### 0.2
 
-- added closeTab based on index
+- add closeTab based on index
 
 ### 0.1
 

@@ -6,7 +6,7 @@ license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.5.1
+version: 0.5.2
 
 requires:
   core/1.4:
@@ -23,7 +23,7 @@ provides: TabPane
 
 (function() {
 
-// make typeOf usable for MooTools 1.2 through 1.4
+// make typeOf usable for MooTools 1.2 through 1.5
 var typeOf = this.typeOf || this.$type;
 
 var TabPane = this.TabPane = new Class({

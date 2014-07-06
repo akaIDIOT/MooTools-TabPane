@@ -1,12 +1,12 @@
 /*
 ---
-description: TabPane extensions 
+description: TabPane extensions
 
 license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.4
+version: 0.5.2
 
 requires: TabPane
 
@@ -40,7 +40,7 @@ this.TabPane.implement({
 			this.show(tab);
 		}
 	},
-	
+
 	close: function(what) {
 		if (typeOf(what) != 'number') {
 			what = this.indexOf(what);
@@ -52,13 +52,13 @@ this.TabPane.implement({
 
 		if (tab) {
 			var tabs = this.container.getElements(this.options.tabSelector);
-			var selected = tabs.indexOf(this.container.getElement('.' + this.options.activeClass)); // will always be equal to index if the closing element matches tabSelector 
+			var selected = tabs.indexOf(this.container.getElement('.' + this.options.activeClass)); // will always be equal to index if the closing element matches tabSelector
 
 			tab.destroy();
 			content.destroy();
 			this.fireEvent('close', what);
-			
-			this.show(selected.limit(0, tabs.length - 2)); // a tab was removed, length is 1 less now 
+
+			this.show(selected.limit(0, tabs.length - 2)); // a tab was removed, length is 1 less now
 		}
 	}
 });
