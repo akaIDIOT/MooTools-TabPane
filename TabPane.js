@@ -1,80 +1,108 @@
 /*
 ---
-description: TabPane Class 
+description: TabPane Class
 
 license: MIT-style
 
 authors: akaIDIOT
 
-version: 0.1
+version: 0.5.2
 
 requires:
-  core/1.2.4:
+  core/1.4:
   - Class
-  - Class.Extras 
-  - Element 
+  - Class.Extras
+  - Event
+  - Element
   - Element.Event
-  - Selectors
-  more/1.2.4:
   - Element.Delegation
 
 provides: TabPane
 ...
 */
 
-var TabPane = new Class({
-    
-    Implements: [Events, Options],
+(function() {
 
-    options: {
-        tabSelector: '.tab',
-        contentSelector: '.content',
-        activeClass: 'active'
-    },
+// make typeOf usable for MooTools 1.2 through 1.5
+var typeOf = this.typeOf || this.$type;
 
-    container: null,
-    showNow: false,
+var TabPane = this.TabPane = new Class({
 
-    initialize: function(container, options) {
-        this.setOptions(options);
+	Implements: [Events, Options],
 
-        this.container = document.id(container);
-        this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
+	options: {
+		tabSelector: '.tab',
+		contentSelector: '.content',
+		activeClass: 'active'
+	},
 
-        this.container.addEvent('click:relay(' + this.options.tabSelector + ')', function(event, tab) {
-            this.showTab(this.container.getElements(this.options.tabSelector).indexOf(tab), tab);
-        }.bind(this));
+	container: null,
 
-        this.container.getElement(this.options.tabSelector).addClass(this.options.activeClass);
-        this.container.getElement(this.options.contentSelector).setStyle('display', 'block');
-    },
+	initialize: function(container, options, showNow) {
+		this.setOptions(options);
 
-    showTab: function(index, tab) {
-        var content = this.container.getElements(this.options.contentSelector)[index];
-        if (!tab) {
-            tab = this.container.getElements(this.options.tabSelector)[index];
-        }
+		this.container = document.id(container);
+		// hide all the content parts by default
+		this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
 
-        if (content) {
-            this.container.getElements(this.options.tabSelector).removeClass(this.options.activeClass);
-            this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
-            tab.addClass(this.options.activeClass);
-            content.setStyle('display', 'block');
-            this.fireEvent('change', index);
-        } 
-    },
+		// add a relayed click event to handle switching tabs
+		this.container.addEvent('click:relay(' + this.options.tabSelector + ')', function(event, tab) {
+			this.show(tab);
+		}.bind(this));
 
-    closeTab: function(index) {
-        var tabs     = this.container.getElements(this.options.tabSelector);
-        var selected = tabs.indexOf(this.container.getElement('.' + this.options.activeClass)); // is always equals to index 
-        
-        tabs[index].destroy();
-        this.container.getElements(this.options.contentSelector)[index].destroy();
-        this.fireEvent('close', index);
+		// determine what tab to show right now (default to the 'leftmost' one)
+		if (typeOf(showNow) == 'function') {
+			showNow = showNow();
+		} else {
+			showNow = showNow || 0;
+		}
 
-        // 'intelligently' selecting a tab is sadly not possible, the tab has already been switched before this method is called 
-        this.showTab(index == tabs.length - 1 ? selected - 1 : selected);
-    }
+		this.show(showNow);
+	},
+
+	get: function(index) {
+		if (typeOf(index) == 'element') {
+			// call get with the index of the supplied element (NB: will break if indexOf returns -1)
+			return this.get(this.indexOf(index));
+		} else {
+			var tab = this.container.getElements(this.options.tabSelector)[index];
+			var content = this.container.getElements(this.options.contentSelector)[index];
+			return [tab, content];
+		}
+	},
+
+	indexOf: function(element) {
+		if (element.match(this.options.tabSelector)) {
+			return this.container.getElements(this.options.tabSelector).indexOf(element);
+		} else if (element.match(this.options.contentSelector)) {
+			return this.container.getElements(this.options.contentSelector).indexOf(element);
+		} else {
+			// element is neither tab nor content, return -1 per convention
+			return -1;
+		}
+	},
+
+	show: function(what) {
+		if (typeOf(what) != 'number') {
+			// turn the argument into its usable form: a number
+			what = this.indexOf(what);
+		}
+
+		// if only JavaScript had tuple unpacking...
+		var items = this.get(what);
+		var tab = items[0];
+		var content = items[1];
+
+		if (tab) {
+			this.container.getElements(this.options.tabSelector).removeClass(this.options.activeClass);
+			this.container.getElements(this.options.contentSelector).setStyle('display', 'none');
+			tab.addClass(this.options.activeClass);
+			content.setStyle('display', 'block');
+			this.fireEvent('change', what);
+		}
+		// no else, not clear what to do
+	}
 
 });
 
+})();
